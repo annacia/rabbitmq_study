@@ -1,0 +1,4 @@
+.vscode
+php/vendor/
+composer-setup.php
+composer.lock
