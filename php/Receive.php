@@ -9,7 +9,7 @@ class Receive
     private $_connection;
     private $_queue;
 
-    public function __contruct($host, $port)
+    public function __construct($host, $port)
     {
         $this->_connection = new AMQPStreamConnection($host, $port, 'guest', 'guest');
         
@@ -17,7 +17,7 @@ class Receive
     
     public function run()
     {
-        $channel = $this->getConnection()->channel();
+        $channel = $this->_connection->channel();
         $channel->queue_declare($this->getQueue(), false, false, false, false);
         
         echo " [*] Waiting for messages. To exit press CTRL+C\n";

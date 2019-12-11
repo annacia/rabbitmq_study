@@ -9,7 +9,7 @@ class Message
     private $_channel;
     private $_queue;
 
-    public function __contruct($value, $queue)
+    public function __construct($value, $queue)
     {
         $this->setQueue($queue);
         $this->setValue($value);
