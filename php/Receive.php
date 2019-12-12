@@ -9,9 +9,9 @@ class Receive
     private $_connection;
     private $_queue;
 
-    public function __construct($host, $port)
+    public function __construct($host, $port, $username, $password)
     {
-        $this->_connection = new AMQPStreamConnection($host, $port, 'guest', 'guest');
+        $this->_connection = new AMQPStreamConnection($host, $port, $username, $password);
         
     }
     
@@ -40,7 +40,7 @@ class Receive
     /**
      * Get the value of _queue
      */ 
-    public function geQueue()
+    public function getQueue()
     {
         return $this->_queue;
     }
@@ -50,7 +50,7 @@ class Receive
      *
      * @return  self
      */ 
-    public function seQueue($queue)
+    public function setQueue($queue)
     {
         $this->_queue = $queue;
 
@@ -58,5 +58,6 @@ class Receive
     }
 }
 
-$receive = new Receive('localhost', 80);
+$receive = new Receive('10.4.4.4', 5672, 'carol', '123456');
+$receive->setQueue('hello');
 $receive->run();

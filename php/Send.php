@@ -9,9 +9,9 @@ class Send
     private $_connection;
     private $_message;
 
-    public function __construct($host, $port)
+    public function __construct($host, $port, $username, $password)
     {
-        $this->_connection = new AMQPStreamConnection($host, $port, 'guest', 'guest');
+        $this->_connection = new AMQPStreamConnection($host, $port, $username, $password);
     }
 
     public function run()
@@ -43,7 +43,7 @@ class Send
     }
 }
 
-$send = new Send('10.0.0.2', 80);
+$send = new Send('10.4.4.4', 5672, 'carol', '123456');
 $message = new Message('ooi', 'hello');
 
 $send->setMessage($message)->run();
