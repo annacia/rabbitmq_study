@@ -24,6 +24,9 @@ class Receive
         
         $callback = function ($msg) {
             echo ' [x] Received ', $msg->body, "\n";
+            sleep(substr_count($msg->body, '.'));
+            echo " [x] Done\n";
+            $msg->delivery_info['channel']->basic_ack($msg->delivery_info['delivery_tag']);
         };
         
         $channel->basic_consume($this->getQueue(), '', false, true, false, false, $callback);

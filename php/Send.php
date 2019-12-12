@@ -43,7 +43,12 @@ class Send
     }
 }
 
+$data = implode(' ', array_slice($argv, 1));
+if (empty($data)) {
+    $data = "Hello World!";
+}
+
 $send = new Send('10.4.4.4', 5672, 'carol', '123456');
-$message = new Message('ooi', 'hello');
+$message = new Message($data, 'hello');
 
 $send->setMessage($message)->run();
