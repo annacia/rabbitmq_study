@@ -1,26 +1,19 @@
 <?php
 require_once __DIR__ . '/../vendor/autoload.php';
 
-use PhpAmqpLib\Message\AMQPMessage;
+use PhpAmqpLib\Connection\AMQPStreamConnection;
 
 /**
- * Classe abstrata de mensagem
+ * Classe responsável pelo recebimento de mensagens
  */
-class Message_Abstract
+class Receive_Abstract
 {
     /**
-     * @var string
+     * @var object
      * 
-     * conteudo da mensagem
+     * conexao AMPQ
      */
-    private $_value;
-
-    /**
-     * @var AMQPChannel
-     * 
-     * canal de mensagem
-     */
-    private $_channel;
+    private $_connection;
 
     /**
      * @var string
@@ -39,57 +32,23 @@ class Message_Abstract
     private $_type;
 
     /**
-     * Constrói o objeto Message
+     * Constrói o objeto Receive
      * 
-     * @param string $value //conteudo da mensagem
-     * @param string $queue //nome da fila
+     * @param $host
+     * @param $port
+     * @param $username
+     * @param $password
      * 
      * @return void
      */
-    public function __construct($value, $queue)
+    public function __construct($host, $port, $username, $password)
     {
-        $this->setQueue($queue);
-        $this->setValue($value);
+        $this->_connection = new AMQPStreamConnection($host, $port, $username, $password); //abre a conexao
     }
 
-    /**
-     * Get the value of _value
-     */ 
-    public function getValue()
+    public function getConnection()
     {
-        return $this->_value;
-    }
-
-    /**
-     * Set the value of _value
-     *
-     * @return  self
-     */ 
-    public function setValue($value)
-    {
-        $this->_value = $value;
-
-        return $this;
-    }
-
-    /**
-     * Get the value of _channel
-     */ 
-    public function getChannel()
-    {
-        return $this->_channel;
-    }
-
-    /**
-     * Set the value of _channel
-     *
-     * @return  self
-     */ 
-    public function setChannel($channel)
-    {
-        $this->_channel = $channel;
-
-        return $this;
+        return $this->_connection;
     }
 
     /**

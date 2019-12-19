@@ -1,12 +1,11 @@
 <?php
 require_once __DIR__ . '/vendor/autoload.php';
 require_once 'Message.php';
-require_once 'LogMessage.php';
 
 use PhpAmqpLib\Connection\AMQPStreamConnection;
 
 /**
- * Classe responsável pelo envio de mensagens
+ * Classe responsÃ¡vel pelo envio de mensagens
  */
 class Send
 {
@@ -25,7 +24,7 @@ class Send
     private $_message;
 
     /**
-     * Constrói um objeto da classe Send
+     * ConstrÃ³i um objeto da classe Send
      * 
      * @param $host
      * @param $port
@@ -46,7 +45,6 @@ class Send
     {
         $channel = $this->_connection->channel();
         $this->getMessage()->setChannel($channel);
-        var_dump(get_class($channel));
         $this->getMessage()->run();
         $this->_connection->close();
     }
@@ -72,19 +70,20 @@ class Send
     }
 }
 
-//Mensagens comuns
-// $data = implode(' ', array_slice($argv, 1)); //pega a mensagem que foi passada como parametro no shell
-// if (empty($data)) {
-//     $data = "Mensagem Vazia";
-// }
+//Execucao de envio de mensagem
+//php Send.php {$mensagem}
 
-// $send = new Send('10.4.4.4', 5672, 'carol', '123456');
-// $message = new Message($data, 'hello');
-// $message->setDurable(true);
-
-// $send->setMessage($message)->run();
-
-//Mensagens de log
 $send = new Send('10.4.4.4', 5672, 'carol', '123456');
-$message = new LogMessage();
+
+$data = implode(' ', array_slice($argv, 1));
+
+if (empty($data)) {
+    $data = "Mensagem Vazia";
+}
+
+$message = new Message($data, 'exchange_message');
+$message->useExchange = $useExchange;
+$message->setDurable(true);
+$message->setType('fanout');
+
 $send->setMessage($message)->run();

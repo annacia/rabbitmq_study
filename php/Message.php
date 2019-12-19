@@ -1,7 +1,6 @@
 <?php
 require_once __DIR__ . '/vendor/autoload.php';
 require_once __DIR__ . '/Message/Abstract.php';
-require_once __DIR__ . '/Message/Interface.php';
 
 use PhpAmqpLib\Message\AMQPMessage;
 
@@ -9,39 +8,26 @@ use PhpAmqpLib\Message\AMQPMessage;
  * Classe de mensagem
  */
 class Message extends Message_Abstract
-implements Message_Interface
 {
     /**
-     * Constrói o objeto Message
-     * 
-     * @param string $value //conteudo da mensagem
-     * @param string $queue //nome da fila
+     * Envia a mensagem
      * 
      * @return void
      */
-    public function __construct($value, $queue)
-    {
-        $this->setQueue($queue);
-        $this->setValue($value);
-    }
-
-    /**
-     * Envia a mensagem
-     */
-    public function run() : void
+    public function run()
     {
         $channel = $this->getChannel();
 
-        $channel->queue_declare($this->getQueue(), false, $this->getDurable(), false, false);
-        $msg = new AMQPMessage(
-            $this->getValue(),
-            array('delivery_mode' => AMQPMessage::DELIVERY_MODE_PERSISTENT)
-        );
+        $channel->exchange_declare($this->getQueue(), $this->getType(), $this->getDurable(), false, false);
+        //("nome da fila", "tipo de exchange", "duravel?", "", "")
 
-        $channel->basic_publish($msg, '', $this->getQueue());
+        $msg = new AMQPMessage($this->getValue()); //conteudo da mensagem
+        
+        $channel->basic_publish($msg, $this->getQueue());
+        //("objeto da classe AMQPMessage", "nome da fila")
+
         echo " [x] Sent ".$this->getValue()."\n";
         
         $this->getChannel()->close();
     }
-
 }
