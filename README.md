@@ -40,8 +40,8 @@ Existem 3 componentes em um roteamento de uma mensagem AMQP:
 Quando uma mensagem é enviada para uma fila, se existir algum consumidor subscrito nela, a mensagem é enviada diretamente a ele, caso contrário a mensagem fica na fila até que apareça algum subscritor.
 Se existe mais de um subscritor na fila, as mensagens são enviadas por modo round-robin.
 Uma fila pode ser ligada a uma exchange por uma routing key, isso não é obrigatório, mas permite que diversos casos diferentes de entrega de mensagens aconteçam. Para isso, existem 4 tipos diferentes de exchanges:
-* Direct: Caso tenha sido configurada uma routing key, a mensagem será entregada para o consumidor que esteja "escutando" na fila que possui a mesma routing key. Se a roting key esteja em branco, as mensagens serão enviadas para os consumidores que estão "escutando" na fila que possui a roting key em branco também;
-* Fanout: Envia as mensagens em multicast para todos os consumidores que estejam "escutando" na fila ligado a exchange;
+* Direct: Caso tenha sido configurada uma routing key, a mensagem será entregue para o consumidor que esteja subscrito na fila que possui a mesma routing key. Caso a roting key esteja em branco, as mensagens serão enviadas para os consumidores que estão subscritos na fila que possui a roting key em branco também;
+* Fanout: Envia as mensagens em multicast para todos os consumidores que estejam subscritos na fila ligado a exchange;
 * Topic: Permite que mensagens de diferentes fontes vá para a fila;
 * Headers: Pode ser definida uma routing key no lugar da outra e tendo a mesma funcionalidade, a desvantagem é a perda considerável de desempenho.
 
