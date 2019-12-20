@@ -1,4 +1,3 @@
-##Usando RabbitMQ no PHP
 Esse repositório apresenta um exemplo de uso do serviço RabbitMQ utilizando a biblioteca de implementação de AMPQ em PHP php-ampqlib.
 As classes aqui presentes foram baseadas nos 4 primeiros tutoriais do site do RabbitMQ: https://www.rabbitmq.com/tutorials/tutorial-one-php.html
 
