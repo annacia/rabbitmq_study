@@ -18,8 +18,8 @@ class Message extends Message_Abstract
     {
         $channel = $this->getChannel();
 
-        $channel->exchange_declare($this->getQueue(), $this->getType(), $this->getDurable(), false, false);
-        //("nome da fila", "tipo de exchange", "duravel?", "", "")
+        $channel->exchange_declare($this->getQueue(), $this->getType(), false, $this->getDurable(), false);
+        //("nome da fila", "tipo de exchange",  "passivo?", "duravel?", "auto-delete?")
 
         $msg = new AMQPMessage($this->getValue()); //conteudo da mensagem
         

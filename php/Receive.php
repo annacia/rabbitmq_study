@@ -18,13 +18,13 @@ class Receive extends Receive_Abstract
     {
         $channel = $this->getConnection()->channel();
 
-        $channel->exchange_declare($this->getQueue(), $this->getType(), $this->getDurable(), false, false);
-        //("nome da fila", "tipo de exchange", "duravel?", "", "")
+        $channel->exchange_declare($this->getQueue(), $this->getType(), false, $this->getDurable(), false);
+        //("nome da fila", "tipo de exchange",  "passivo?", "duravel?", "auto-delete?")
 
         list($queue_name, ,) = $channel->queue_declare("", false, false, true, false);
-        //("nome da fila", "", "duravel?", "", "")
+        //("nome da fila", "passivo?", "duravel?", "exclusivo?", "auto-delete?")
 
-        $channel->queue_bind($queue_name, $this->getQueue());
+        $channel->queue_bind($queue_name, $this->getQueue()); //liga uma fila com uma exchange
         //("string gerada pelo list", "nome da fila")        
 
         $this->setQueue(null);
@@ -39,7 +39,7 @@ class Receive extends Receive_Abstract
         };
         
         $channel->basic_consume($this->getQueue(), '', false, false, false, false, $callback); //busca novas mensagens
-        //("nome da lista", "", "", "", "", "", "funcao de callback")
+        //("nome da lista", "consumer tag", "no_local", "no_ack", "exclusivo?", "nowait", "funcao de callback")
         
         //Enquanto o canal esta buscando novas mensagens, aguarda
         while ($channel->is_consuming()) {

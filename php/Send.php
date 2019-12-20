@@ -82,7 +82,6 @@ if (empty($data)) {
 }
 
 $message = new Message($data, 'exchange_message');
-$message->useExchange = $useExchange;
 $message->setDurable(true);
 $message->setType('fanout');
 
