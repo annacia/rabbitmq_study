@@ -11,7 +11,7 @@ As classes aqui presentes foram baseadas nos 4 primeiros tutoriais do site do Ra
 - Realize o comando para checar o status do serviço do RabbitMQ: ```rabbitmqctl status```;
 - Caso o RabbitMQ não esteja rodando, realize o comando para inicia-lo: ```service rabbitmq-server start```;
 
-A declaração do exchange está configurada com o tipo "fanout" neste repositório, esse tipo de envio permite que as mensagens enviadas sejam entregues a todos os consumidores subscrito na fila em modo multicast.
+A declaração do exchange está configurada com o tipo "fanout" neste repositório, esse tipo de envio permite que as mensagens enviadas sejam entregues a todos os consumidores subscritos na fila em modo multicast.
 
 - Para receber mensagens, abra um terminal no diretório php/ e execute: ```php Receive.php```
 
