@@ -30,7 +30,7 @@ Uma fila pode ser ligada a uma exchange por uma routing key, isso não é obriga
 Em cada servidor RabbitMQ é possível criar messages brokers virtuais que são virtual hosts (vhosts), evitando assim colisões de nomes de filas e exchanges.
 
 ## Requisitos
-*   É necessário ter o PHP 7, RabbitMQ e Composer instalados.
+*   É necessário ter o PHP >=5.6.3, RabbitMQ e Composer instalados.
 
 ## Enviando e recebendo mensagens
 
