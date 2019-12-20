@@ -1,6 +1,25 @@
 Esse repositório apresenta um exemplo de uso do serviço RabbitMQ utilizando a biblioteca de implementação de AMPQ em PHP php-ampqlib.
 As classes aqui presentes foram baseadas nos 4 primeiros tutoriais do site do RabbitMQ: https://www.rabbitmq.com/tutorials/tutorial-one-php.html
 
+## Requisitos
+*   É necessário ter o PHP >=5.6.3, RabbitMQ e Composer instalados.
+
+## Enviando e recebendo mensagens
+
+- Faça um clone deste repositório;
+- Entre no diretório php/ e digite o comando: ```composer i```;
+- Realize o comando para checar o status do serviço do RabbitMQ: ```sudo rabbitmqctl status```;
+- Caso o RabbitMQ não esteja rodando, realize o comando para inicia-lo: ```service rabbitmq-server start```;
+
+A declaração do exchange está configurada com o tipo "fanout" neste repositório, esse tipo de envio permite que as mensagens enviadas sejam entregues a todos os receivers do mesmo canal.
+
+- Para enviar mensagens, abra um terminal no diretório php/ e execute: ```php Send.php {$mensagem}```
+    * Exemplo: ```php Send.php "enviando mensagem"```
+
+- Para receber mensagens, abra um terminal no diretório php/ e execute: ```php Receive.php```
+
+Ao abrir mais de um terminal para receber mensagens é possível verificar que todos vão receber as mensagens enviadas para o canal que eles estão relacionados.
+
 ## RabbitMQ 
 O RabbitMQ é um serviço de mensageria que utiliza protocolo AMQP, que permite o envio e recebimento de mensagens de forma assíncrona, ele foi escrito em Erlang, roda nos principais sistemas operacionais, é Open Source e pode ter suporte comercial.
 
@@ -28,25 +47,6 @@ Uma fila pode ser ligada a uma exchange por uma routing key, isso não é obriga
 
 ### Virtual Hosts
 Em cada servidor RabbitMQ é possível criar messages brokers virtuais que são virtual hosts (vhosts), evitando assim colisões de nomes de filas e exchanges.
-
-## Requisitos
-*   É necessário ter o PHP >=5.6.3, RabbitMQ e Composer instalados.
-
-## Enviando e recebendo mensagens
-
-- Faça um clone deste repositório;
-- Entre no diretório php/ e digite o comando: ```composer i```;
-- Realize o comando para checar o status do serviço do RabbitMQ: ```sudo rabbitmqctl status```;
-- Caso o RabbitMQ não esteja rodando, realize o comando para inicia-lo: ```service rabbitmq-server start```;
-
-A declaração do exchange está configurada com o tipo "fanout" neste repositório, esse tipo de envio permite que as mensagens enviadas sejam entregues a todos os receivers do mesmo canal.
-
-- Para enviar mensagens, abra um terminal no diretório php/ e execute: ```php Send.php {$mensagem}```
-    * Exemplo: ```php Send.php "enviando mensagem"```
-
-- Para receber mensagens, abra um terminal no diretório php/ e execute: ```php Receive.php```
-
-Ao abrir mais de um terminal para receber mensagens é possível verificar que todos vão receber as mensagens enviadas para o canal que eles estão relacionados.
 
 ## Referências
 
