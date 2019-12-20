@@ -1,13 +1,13 @@
 Esse repositório apresenta um exemplo de uso do serviço RabbitMQ utilizando a biblioteca de implementação de AMPQ em PHP php-ampqlib.
 As classes aqui presentes foram baseadas nos 4 primeiros tutoriais do site do RabbitMQ: https://www.rabbitmq.com/tutorials/tutorial-one-php.html
 
-### RabbitMQ 
+## RabbitMQ 
 O RabbitMQ é um serviço de mensageria que utiliza protocolo AMQP, ele foi escrito em Erlang, roda nos principais sistemas operacionais, é Open Source e pode ter suporte comercial.
 
-### AMQP
+## AMQP
 O AMQP é um protocolo que permite o envio e recebimento de mensagens de forma assíncrona.
 
-### Requisitos
+## Requisitos
 *   É necessário ter o PHP 7 instalado;
 *   É necessário ter o RabbitMQ instalado;
 *   É necessário ter o Composer instalado.
