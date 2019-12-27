@@ -48,6 +48,17 @@ Uma fila pode ser ligada a uma exchange por uma routing key, isso não é obriga
 ### Virtual Hosts
 Em cada servidor RabbitMQ é possível criar messages brokers virtuais que são virtual hosts (vhosts), evitando assim colisões de nomes de filas e exchanges.
 
+### Vantagens
+* Possibilita a comunicação entre servidores e microserviços;
+* Melhoria na performance, pois o processamento é assíncrono;
+* Melhor escabilidade em processos com maior demanda.
+
+### Desvantagens
+* Dependendo da implementação, a performance pode ser perdida de maneira considerável.
+
+### Por que usar?
+Em situações de demanda baixa é aceitável realizar processos que envolvam determinados dados em um sistema, por exemplo, uma consulta que envolve 10 linhas em um banco de dados não demanda muito custo de processamento, mas uma consulta que envolve 100000 linhas o custo de processamento é muito maior. O RabbitMQ ajuda nesse sentido, pois na mensageria a consulta nunca acaba, sempre terá uma fila aguardando algum consumidor disponível para processá-la, dividindo todo o processamento entre diversos consumidores.
+
 ## Referências
 
 https://www.concrete.com.br/2012/01/26/rabbitmq-conceitos-basicos/
